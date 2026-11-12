@@ -1,0 +1,136 @@
+{
+  "generated_at": "2026-11-12T09:09:13.864188+00:00",
+  "repos": [
+    "repo-b",
+    "repo-a"
+  ],
+  "errors": {},
+  "duplicates_merged": 1,
+  "findings": [
+    {
+      "repo": "repo-a",
+      "rule_id": "demo.python.sql-injection-string-building",
+      "path": "app.py",
+      "start_line": 9,
+      "end_line": 9,
+      "message": "SQL query built with string formatting or concatenation. Use parameterized queries instead.",
+      "severity": "ERROR",
+      "confidence": "HIGH",
+      "cwe": [
+        89
+      ],
+      "owasp": [
+        "A03:2021 - Injection"
+      ],
+      "snippet": "    cur.execute(\"SELECT * FROM users WHERE name = '%s'\" % username)",
+      "low_value_path": false,
+      "cluster_key": "e26c842e6f980fc3cdf678e3032c1568a1613e33",
+      "occurrences": [
+        {
+          "repo": "repo-a",
+          "path": "app.py",
+          "line": 9
+        },
+        {
+          "repo": "repo-b",
+          "path": "app.py",
+          "line": 3
+        }
+      ],
+      "score": 77.0,
+      "band": "Critical",
+      "is_new": true,
+      "id": "e26c842e6f98"
+    },
+    {
+      "repo": "repo-a",
+      "rule_id": "demo.python.subprocess-shell-true",
+      "path": "app.py",
+      "start_line": 14,
+      "end_line": 14,
+      "message": "subprocess call with shell=True can lead to OS command injection if any input is user-controlled.",
+      "severity": "WARNING",
+      "confidence": "MEDIUM",
+      "cwe": [
+        78
+      ],
+      "owasp": [
+        "A03:2021 - Injection"
+      ],
+      "snippet": "    return subprocess.run(\"ping -c 1 \" + host, shell=True)",
+      "low_value_path": false,
+      "cluster_key": "ce48e5334e3c0a74de1b8af9a6f80753e68b9f51",
+      "occurrences": [
+        {
+          "repo": "repo-a",
+          "path": "app.py",
+          "line": 14
+        }
+      ],
+      "score": 43.0,
+      "band": "Medium",
+      "is_new": true,
+      "id": "ce48e5334e3c"
+    },
+    {
+      "repo": "repo-a",
+      "rule_id": "demo.python.hardcoded-credential",
+      "path": "app.py",
+      "start_line": 4,
+      "end_line": 4,
+      "message": "Possible hard-coded credential. Load secrets from a secrets manager or environment instead.",
+      "severity": "WARNING",
+      "confidence": "MEDIUM",
+      "cwe": [
+        798
+      ],
+      "owasp": [
+        "A07:2021 - Identification and Authentication Failures"
+      ],
+      "snippet": "DB_PASSWORD = \"hunter2-prod\"",
+      "low_value_path": false,
+      "cluster_key": "3e66e74d15d0f7d11703bf58be082f74cf9d4daf",
+      "occurrences": [
+        {
+          "repo": "repo-a",
+          "path": "app.py",
+          "line": 4
+        }
+      ],
+      "score": 40.0,
+      "band": "Medium",
+      "is_new": true,
+      "id": "3e66e74d15d0"
+    },
+    {
+      "repo": "repo-b",
+      "rule_id": "demo.python.hardcoded-credential",
+      "path": "examples/sample.py",
+      "start_line": 2,
+      "end_line": 2,
+      "message": "Possible hard-coded credential. Load secrets from a secrets manager or environment instead.",
+      "severity": "WARNING",
+      "confidence": "MEDIUM",
+      "cwe": [
+        798
+      ],
+      "owasp": [
+        "A07:2021 - Identification and Authentication Failures"
+      ],
+      "snippet": "API_TOKEN = \"example-token-for-docs\"",
+      "low_value_path": true,
+      "cluster_key": "5c114d33570a339064c65ad4f4a8daed03a002c7",
+      "occurrences": [
+        {
+          "repo": "repo-b",
+          "path": "examples/sample.py",
+          "line": 2
+        }
+      ],
+      "score": 12.0,
+      "band": "Low",
+      "is_new": true,
+      "id": "5c114d33570a"
+    }
+  ]
+}

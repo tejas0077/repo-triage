@@ -1,0 +1,38 @@
+rules:
+  - id: demo.python.sql-injection-string-building
+    languages: [python]
+    severity: ERROR
+    message: SQL query built with string formatting or concatenation. Use parameterized queries instead.
+    metadata:
+      cwe: ["CWE-89: Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')"]
+      owasp: ["A03:2021 - Injection"]
+      confidence: HIGH
+    pattern-either:
+      - pattern: $CUR.execute("..." % ...)
+      - pattern: $CUR.execute("...".format(...))
+      - pattern: $CUR.execute(f"...{$X}...")
+      - pattern: $CUR.execute("..." + $X)
+
+  - id: demo.python.subprocess-shell-true
+    languages: [python]
+    severity: WARNING
+    message: subprocess call with shell=True can lead to OS command injection if any input is user-controlled.
+    metadata:
+      cwe: ["CWE-78: Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')"]
+      owasp: ["A03:2021 - Injection"]
+      confidence: MEDIUM
+    pattern: subprocess.$FUNC(..., shell=True, ...)
+
+  - id: demo.python.hardcoded-credential
+    languages: [python]
+    severity: WARNING
+    message: Possible hard-coded credential. Load secrets from a secrets manager or environment instead.
+    metadata:
+      cwe: ["CWE-798: Use of Hard-coded Credentials"]
+      owasp: ["A07:2021 - Identification and Authentication Failures"]
+      confidence: MEDIUM
+    patterns:
+      - pattern: $VAR = "..."
+      - metavariable-regex:
+          metavariable: $VAR
+          regex: (?i).*(password|passwd|secret|api_key|token).*
