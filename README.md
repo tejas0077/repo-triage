@@ -1,5 +1,7 @@
 # repo-triage
 
+> The files under `demo/` are intentionally vulnerable examples used to test the tool. Do not use them in production.
+
 Run [Semgrep](https://semgrep.dev) across many repositories, merge duplicate findings, score what is
 left, and get a prioritized report. Built to answer the question AppSec teams actually face at scale:
 **"Out of 2,000 findings, what should we look at first?"**
